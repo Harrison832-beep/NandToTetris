@@ -1,0 +1,79 @@
+CHIP Mul16{
+    IN x[16], y[16];
+    OUT
+        out[16];
+
+    PARTS:
+    // Code:
+    // in order to do multiplication, for every digit of y
+    // x should be shifted left by 1 digit
+    // the use Mux to decide if the result should be added
+    // in order to make the code concise, Mul2 and Sum are built and implemented
+
+    // 1st digit
+    Mux16(a=false, b=x, sel=y[0], out=mux0);
+
+    // 2nd digit
+    Mul2(in=x, out=mul1);
+    Mux16(a=false, b=mul1, sel=y[1], out=mux1);  
+
+    // 3rd digit
+    Mul2(in=mul1, out=mul2);
+    Mux16(a=false, b=mul2, sel=y[2], out=mux2);
+
+    // 4th digit
+    Mul2(in=mul2, out=mul3);
+    Mux16(a=false, b=mul3, sel=y[3], out=mux3);
+
+    // 5th digit
+    Mul2(in=mul3, out=mul4);
+    Mux16(a=false, b=mul4, sel=y[4], out=mux4);
+
+    // 6th digit
+    Mul2(in=mul4, out=mul5);
+    Mux16(a=false, b=mul5, sel=y[5], out=mux5);
+
+    // 7th digit
+    Mul2(in=mul5, out=mul6);
+    Mux16(a=false, b=mul6, sel=y[6], out=mux6);
+
+    // 8th digit
+    Mul2(in=mul6, out=mul7);
+    Mux16(a=false, b=mul7, sel=y[7], out=mux7);
+
+    // 9th digit
+    Mul2(in=mul7, out=mul8);
+    Mux16(a=false, b=mul8, sel=y[8], out=mux8);
+
+    // 10th digit
+    Mul2(in=mul8, out=mul9);
+    Mux16(a=false, b=mul9, sel=y[9], out=mux9);
+
+    // 11th digit
+    Mul2(in=mul9, out=mul10);
+    Mux16(a=false, b=mul10, sel=y[10], out=mux10);
+
+    // 12th digit
+    Mul2(in=mul10, out=mul11);
+    Mux16(a=false, b=mul11, sel=y[11], out=mux11);
+
+    // 13th digit
+    Mul2(in=mul11, out=mul12);
+    Mux16(a=false, b=mul12, sel=y[12], out=mux12);
+
+    // 14th digit
+    Mul2(in=mul12, out=mul13);
+    Mux16(a=false, b=mul13, sel=y[13], out=mux13);
+
+    // 15th digit
+    Mul2(in=mul13, out=mul14);
+    Mux16(a=false, b=mul14, sel=y[14], out=mux14);
+
+    // 16th digit
+    Mul2(in=mul14, out=mul15);
+    Mux16(a=false, b=mul15, sel=y[15], out=mux15);
+
+    // sum them all up using Chip Sum
+    Sum16(in0=mux0, in1=mux1, in2=mux2, in3=mux3, in4=mux4, in5=mux5, in6=mux6, in7=mux7,
+          in8=mux8, in9=mux9, in10=mux10, in11=mux11, in12=mux12, in13=mux13, in14=mux14, in15=mux15, out=out);
+}

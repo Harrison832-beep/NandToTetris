@@ -1,0 +1,13 @@
+// this chip is built for the case when the 2nd digit of y is 1
+// can also be used for further calculation
+CHIP Exp2{
+    IN
+        in[16];
+    OUT
+        out[16];
+
+    PARTS:
+    // Code:
+    // output (input^2)
+    Mul16(x=in, y=in, out=out);
+}

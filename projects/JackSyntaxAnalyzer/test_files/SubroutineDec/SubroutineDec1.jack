@@ -1,0 +1,7 @@
+class SubroutineDec1 {
+    constructor SubroutineDec1 new(){}    
+
+    function void main() {}
+
+    method void test1() {}
+}

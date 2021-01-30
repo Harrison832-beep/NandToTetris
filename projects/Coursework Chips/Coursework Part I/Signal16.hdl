@@ -1,0 +1,13 @@
+CHIP Signal16{
+    IN
+        in[16];
+    OUT
+        out;
+
+    PARTS:
+    // Code:
+    // if input>32767, output 1
+    // else, output 0
+   
+    Mux(a=false, b=true, sel=in[15], out=out);	//if the 15th digit of the input is 1, overflow, ouput 1, otherwise
+}

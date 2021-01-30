@@ -1,0 +1,4 @@
+push local 0  //push x onto the stack
+push local 1  //push y onto the stack
+add	      //x + y
+pop local 2   //z = x + y

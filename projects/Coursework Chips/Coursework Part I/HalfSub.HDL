@@ -1,0 +1,19 @@
+CHIP HalfSub{
+    IN    
+        x, y;
+
+    OUT
+        borrow, out;
+
+    PARTS:
+    // Code:
+    //Negate y
+    Not(in=y, out=noty);
+
+    // if Or(x, noty) is 0, borrow 1 from higher digit
+    Or(a=x, b=noty, out=aOrnoty);
+    Mux(a=true, b=false, sel=aOrnoty, out=borrow);  
+
+    // Output x-y
+    Xor(a=x, b=y, out=out);
+}

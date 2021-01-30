@@ -1,0 +1,27 @@
+CHIP Sum16{
+    IN
+        in0[16], in1[16], in2[16], in3[16], in4[16], in5[16], in6[16], in7[16],
+        in8[16], in9[16], in10[16], in11[16], in12[16], in13[16], in14[16], in15[16];
+
+    OUT
+        out[16];
+
+    PARTS:
+    //Code
+    Add16(a=in0, b=in1, out=add1);
+    Add16(a=in2, b=in3, out=add2);
+    Add16(a=in4, b=in5, out=add3);
+    Add16(a=in6, b=in7, out=add4);
+    Add16(a=in8, b=in9, out=add5);
+    Add16(a=in10, b=in11, out=add6);
+    Add16(a=in12, b=in13, out=add7);
+    Add16(a=in14, b=in15, out=add8);
+
+    Add16(a=add1, b=add2, out=add12A);
+    Add16(a=add3, b=add4, out=add34A);
+    Add16(a=add5, b=add6, out=add56A);
+    Add16(a=add7, b=add8, out=add78A);
+    Add16(a=add12A, b=add34A, out=add12B);
+    Add16(a=add56A, b=add78A, out=add34B);
+    Add16(a=add12B, b=add34B, out=out);
+}

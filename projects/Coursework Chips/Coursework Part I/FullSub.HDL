@@ -1,0 +1,19 @@
+CHIP FullSub{
+    IN 
+        x, y, b;
+
+    OUT
+        borrow, out;
+
+    PARTS:
+    // Code:
+    // Use two HalfSubs to build a FullSub
+    
+    // because the "borrowing" outcome is different from simply using HalfSub, have to use another approach
+    // x gets borrowed first, could be borrowed 0, could be borrowed 1
+    HalfSub(x=x, y=b, borrow=borrow1, out=out1);
+
+    // final result
+    HalfSub(x=out1, y=y, borrow=borrow2, out=out);
+    Or(a=borrow1, b=borrow2, out=borrow);
+}

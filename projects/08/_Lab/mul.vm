@@ -1,0 +1,34 @@
+push constant 3
+pop local 0
+push constant 4
+pop local 1
+push local 1
+pop temp 0
+
+push local 0
+push local 0
+add
+pop local 2
+push temp 0
+push constant 1
+sub
+pop temp 0
+goto LOOP_ONE
+
+label LOOP_TWO
+push local 2
+push local 0
+add
+pop local 2
+goto LOOP_ONE
+
+label LOOP_ONE
+push temp 0
+push constant 1
+sub
+pop temp 0
+push temp 0
+if-goto LOOP_TWO
+push local 2
+
+

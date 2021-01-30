@@ -1,0 +1,9 @@
+push constant 5
+pop local 0
+push constant 1 
+pop local 1
+push local 0
+push local 1
+sub
+pop local 2
+

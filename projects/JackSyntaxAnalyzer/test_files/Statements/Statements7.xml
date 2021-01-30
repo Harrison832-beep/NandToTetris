@@ -1,0 +1,11 @@
+<statements>
+<returnStatement>
+<keyword> return </keyword>
+<expression>
+<term>
+<keyword> null </keyword>
+</term>
+</expression>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>

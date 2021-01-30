@@ -1,0 +1,4 @@
+class ClassVarDec2 {
+   static int x, y;
+   static int size;
+}

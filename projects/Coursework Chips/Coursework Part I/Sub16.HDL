@@ -1,0 +1,28 @@
+CHIP Sub16{
+    IN
+         x[16], y[16];
+
+    OUT
+         out[16];
+
+    PARTS:
+    // Code:
+    // putting 1 HalfSub and 15 FullSub to build Sub16:
+    HalfSub(x=x[0], y=y[0], borrow=b0, out=out[0]);
+    FullSub(x=x[1], y=y[1], b=b0, borrow=b1, out=out[1]);
+    FullSub(x=x[2], y=y[2], b=b1, borrow=b2, out=out[2]);
+    FullSub(x=x[3], y=y[3], b=b2, borrow=b3, out=out[3]);
+    FullSub(x=x[4], y=y[4], b=b3, borrow=b4, out=out[4]);
+    FullSub(x=x[5], y=y[5], b=b4, borrow=b5, out=out[5]);
+    FullSub(x=x[6], y=y[6], b=b5, borrow=b6, out=out[6]);
+    FullSub(x=x[7], y=y[7], b=b6, borrow=b7, out=out[7]);
+    FullSub(x=x[8], y=y[8], b=b7, borrow=b8, out=out[8]);
+    FullSub(x=x[9], y=y[9], b=b8, borrow=b9, out=out[9]);
+    FullSub(x=x[10], y=y[10], b=b9, borrow=b10, out=out[10]);
+    FullSub(x=x[11], y=y[11], b=b10, borrow=b11, out=out[11]);
+    FullSub(x=x[12], y=y[12], b=b11, borrow=b12, out=out[12]);
+    FullSub(x=x[13], y=y[13], b=b12, borrow=b13, out=out[13]);
+    FullSub(x=x[14], y=y[14], b=b13, borrow=b14, out=out[14]);
+    FullSub(x=x[15], y=y[15], b=b14, borrow=b15, out=out[15]);
+
+}

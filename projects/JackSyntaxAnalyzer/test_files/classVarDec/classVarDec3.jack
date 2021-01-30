@@ -1,0 +1,6 @@
+class ClassVarDec3 {
+   field int x, y;
+   field int size;
+   static int a,b,c;
+   static boolean HORIZONTAL;
+}

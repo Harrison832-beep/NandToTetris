@@ -1,0 +1,18 @@
+The ALU includes the following functions:
+
+(set x and y to some values)
+(set the desired functions to 1 to perform respected functions)
+1.S: Subtraction
+2.M: Multiplication
+3.D: Division (Divide x with 2)
+4.F: EXponentiation
+5.GL: Check if x is Greater Than y
+6.load: load previously stored results
+7.address: choose the location of memory
+
+Note: 
+1. The max values for Exponential function is x=8 and y=5, if overflow, the result will be the value of x, but only within certain range
+2. GL is suggested being used only as a function of checking if x is greater than y, since it only outputs 1 and -1 in decimal, it is in fact a 16-bits in binary, therefore, if used combined with other chips, note the result might be messed up
+3. The Division function will not show result with floating point, always rounded-down if it is a floating point result
+4. If load is set to 1, the data stored in the specified address will be used and the data will remain unchanged
+5. Set load to 0 if want to store or update any data in the specified memory location

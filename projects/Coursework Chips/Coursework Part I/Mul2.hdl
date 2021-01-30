@@ -1,0 +1,12 @@
+CHIP Mul2{
+    IN 
+        in[16];
+    OUT
+        out[16];
+
+    PARTS:
+    // Code:
+    // the code simply multiply the input by 2, 
+    // or say shift the input to the left by 1 digit.
+    Add16(a=in, b=in, out=out);
+}

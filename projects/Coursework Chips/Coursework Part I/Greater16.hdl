@@ -1,0 +1,32 @@
+CHIP Greater16{
+    IN
+        x[16], y[16];
+    OUT
+        out[16];
+
+    PARTS:
+    // Code:
+    // if x>y, output 1
+    // else, output 0
+    // use subtraction, if x <= y
+    // the result will be either 0 or an overflow
+
+    Sub16(x=x, y=y, out=sub);
+
+    Sub16(x=x, y=y, out[0..7]=sub1, out[8..15]=sub2);
+
+    // check if Subtraction is 0
+    // if 0, output -1
+    Or8Way(in=sub1, out=or81);
+    Or8Way(in=sub2, out=or82);
+    Or(a=or81, b=or82, out=or3);
+    Signal16(in=sub, out=sign); // if not 0, check for overflow
+    Mux(a=true, b=sign, sel=or3, out=if0);
+
+    // if overflow then output -1, else, output 1
+    And16(a=sub, b=false, out=zero);
+    Not16(in=zero, out=ng1);
+    Inc16(in=zero, out=ps1);
+
+    Mux16(a=ps1, b=ng1, sel=if0, out=out);    
+}

@@ -1,0 +1,13 @@
+// this chip is built for the use of the value 0 of y in chip exp16
+CHIP Exp1{
+    IN
+        x[16], y;
+    OUT
+        out[16];
+
+    PARTS:
+    // Code:
+    // if y=0, output 1, otherwise
+    Inc16(in=false, out=one);
+    Mux16(a=one, b=x, sel=y, out=out);
+}

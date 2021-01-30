@@ -1,0 +1,37 @@
+CHIP Exp16{
+    IN
+        x[16], y[16];
+    OUT
+        out[16];
+
+    PARTS:
+    // Code:
+    // note: the max values for x is 9(1001), y is 5(101)
+    // x or y cannot be negative
+    // x and y should not be all 0(output will be 1)
+    // if overflow, output original input x, but only within certain range
+    // if the result gets too huge, result will be unexpected
+    // first, list all the possible results
+    // Only most to 5 is expected, only 3 digits will be handled
+    // Digits of y other than the first three will be ignored
+    Exp2(in=x, out=exp1);	//2nd digit (x^2)
+    Exp2(in=exp1, out=exp2);	//3rd digit (x^4)
+
+
+
+    // 1st digit
+    Exp1(x=x, y=y[0], out=out0);
+    // 2nd
+    Exp1(x=exp1, y=y[1], out=out1);  // if y[1]=1, output x^2, else output 1
+    // 3rd
+    Exp1(x=exp2, y=y[2], out=out2);  // if y[2]=1, output x^4, else output 1
+
+
+
+    // gather the results
+    Mul16(x=out0, y=out1, out=mul01);
+    Mul16(x=mul01, y=out2, out=mul02);
+
+    Signal16(in=mul02, out=of);
+    Mux16(a=mul02, b=x, sel=of, out=out);
+}

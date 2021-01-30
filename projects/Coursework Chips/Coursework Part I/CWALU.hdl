@@ -1,0 +1,66 @@
+CHIP CWALU {
+    IN  
+        x[16], y[16],      
+        S,   // subtraction
+        M,   // Multiplication
+        D,   // Division
+        F,   // Exponent
+        GL,  // Greater than
+	load,	//load store results
+        address[14];	//Memory address
+
+
+    OUT 
+        out[16], 
+        of;  // Overflow
+        
+
+    PARTS:
+    // Put you code here:
+    // same as the ALU, put all the chips together
+    // then use multiplexor to decide if the result will be taken and output
+    // This ALU can perform multiple arithmetic functions
+    // but the result will be unpredictable when it is used in the manner of combinations
+    // Thus, it is suggested not to exceed 2 functions when using it
+    // The ALU chip will also be able to store and reuse the outputs
+    
+    // choose if stored data is used
+    // if reuse==1, load the data stored in the specified address in the memory
+    // otherwise, if use the user input
+    // If choose to load the RAM, the data in RAM will not be modified
+    // Otherwise, the RAM will be updated with the user output
+    Mux16(a=x, b=savedOut, sel=load, out=inX);
+    Mux(a=true, b=false, sel=load, out=ramLoad);
+
+    // subtraction
+    Sub16(x=inX, y=y, out=sub);
+    Mux16(a=inX, b=sub, sel=S, out=Sout);
+
+    // multiplication
+    Mul16(x=Sout, y=y, out=mul);
+    Mux16(a=Sout, b=mul, sel=M, out=Mout);
+
+    // division
+    Div16(in=Mout, out=div);
+    Mux16(a=Mout, b=div, sel=D, out=Dout);
+
+    // exponential
+    Exp16(x=Dout, y=y, out=exp);
+    Mux16(a=Dout, b=exp, sel=F, out=Fout);
+
+    // greater than
+    Greater16(x=Fout, y=y, out=gl);
+    Mux16(a=Fout, b=gl, sel=GL, out=GLout);
+
+    // output result
+    Or16(a=GLout, b=false, out=out);
+
+    // store result in RAM
+    // If reuse, the data in the address will be overwritten
+    RAM16K(in=GLout, load=ramLoad, address=address, out=savedOut);
+    
+    // overflow
+    Signal16(in=GLout, out=of);
+
+   
+}
